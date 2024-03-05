@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+    <title>Etudiant</title>
+    <style type="">
+        body {
+            background-image: url('https://img.freepik.com/free-photo/blue-smoke-background-textured-wallpaper-high-resolution_53876-128239.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+    </style>
+</h:head>
+
+<h:body styleClass="center">
+    <h1 class="h1 text-center" style="color: black"> Gestion des étudiants </h1>
+    <br />
+    <div class="container center mt-5 mx-auto" style="color: black">
+        <h:form>
+            <fieldset class="border p-3 rounded" style="max-width: 700px; color: black">
+                <legend class="font-weight-bold" style="color: black">${etudiantBean.label} d'un étudiant</legend>
+
+                <div class="row mb-3 " style="color: black">
+                    <div class="col-md-6 mx-auto" style="color: black">
+                        <label for="idInput" class="form-label" style="color: black">ID:</label>
+                        <h:inputText id="idInput" value="#{etudiantBean.etudiant.id}" class="form-control" readonly="true" />
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6 mx-auto">
+                        <label for="codeInput" class="form-label" style="color: black">Nom:</label>
+                        <h:inputText id="codeInput" value="#{etudiantBean.etudiant.nom}" class="form-control" required="true" />
+                    </div>
+                </div>
+
+                <div class="row mb-3 ">
+                    <div class="col-md-6 mx-auto">
+                        <label for="prenomInput" class="form-label" style="color: black">Prenom:</label>
+                        <h:inputText id="prenomInput" value="#{etudiantBean.etudiant.prenom}" class="form-control" required="true" />
+                    </div>
+                </div>
+                <div class="row mb-3 ">
+                    <div class="col-md-6 mx-auto">
+                        <label for="cneInput" class="form-label" style="color: black">CNE:</label>
+                        <h:inputText id="cneInput" value="#{etudiantBean.etudiant.cne}" class="form-control" required="true" />
+                    </div>
+                </div>
+                <h:form>
+                    <div class="row mb-3 ">
+                        <div class="col-md-6 mx-auto">
+                            <label class="form-label" style="color: black">Filiere:</label>
+                            <h:selectOneMenu value = "#{etudiantBean.filiere}" class="form-control custom-select">
+                                <f:selectItem itemValue = "#{etudiantBean.etudiant.filiere}" itemLabel = "#{etudiantBean.etudiant.filiere!=null ? etudiantBean.etudiant.filiere.code : 'Select one' }" />
+                                <f:selectItems value="#{filiereBean.filieres}" var="f" itemLabel="#{f.code}" itemValue="#{f.id}" />
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                </h:form>
+
+                <div class="row mb-3">
+                    <div class="col-md-6 mx-auto">
+                        <h:commandButton action="#{etudiantBean.save()}" value="#{etudiantBean.label}" styleClass="btn btn-primary" style="background-color: blue; border-color: blue; color: #fff;"/>
+                    </div>
+                </div>
+            </fieldset>
+        </h:form>
+    </div>
+
+    <div class="container mt-5 mx-auto">
+        <h:form>
+            <tr>
+                <td colspan="5" style="text-align: left; color: black">
+                    Nombre total des etudiants est : #{etudiantBean.etudiants.size()}
+                </td>
+            </tr>
+            <table class="table table-striped">
+                <thead style="background-color: lightskyblue">
+                <tr>
+                    <th scope="col" style="color: black">ID</th>
+                    <th scope="col" style="color: black">Nom</th>
+                    <th scope="col" style="color: black">Prenom</th>
+                    <th scope="col" style="color: black">CNE</th>
+                    <th scope="col" style="color: black">Filiere</th>
+                    <th scope="col" style="color: black">Modifier</th>
+                    <th scope="col" style="color: black">Supprimer</th>
+                </tr>
+                </thead>
+                <tbody>
+                <ui:repeat var="e" value="#{etudiantBean.etudiants}">
+                    <tr style="color: black">
+                        <td style="color: black">#{e.id}</td>
+                        <td style="color: black">#{e.nom}</td>
+                        <td style="color: black">#{e.prenom}</td>
+                        <td style="color: black">#{e.cne}</td>
+                        <td style="color: black">#{e.filiere.code}</td>
+                        <td>
+                            <h:commandLink action="#{etudiantBean.modifier(e)}" style="padding: 0; border: none;">
+                                <i class="fas fa-pencil-alt" style="color: #006400;"/> <!-- Solid pencil Icon -->
+                            </h:commandLink>
+                        </td>
+                        <td>
+                            <h:commandLink action="#{etudiantBean.supprimer(e)}" onclick="return confirm('Are you sure??')" style="padding: 0; border: none;">
+                                <i class="fas fa-trash" style="color: #FF0000;"/> <!-- Solid Trash Icon -->
+                            </h:commandLink>
+                        </td>
+                    </tr>
+                </ui:repeat>
+                </tbody>
+            </table>
+        </h:form>
+    </div>
+
+</h:body>
+
+</html>

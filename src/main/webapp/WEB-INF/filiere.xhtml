@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:border-color="http://java.sun.com/jsf/composite">
+
+<h:head>
+    <title>Filière</title>
+    <style type="">
+        body {
+            background-image: url('https://img.freepik.com/free-photo/blue-smoke-background-textured-wallpaper-high-resolution_53876-128239.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+    </style>
+</h:head>
+
+<h:body styleClass="center">
+    <h1 class="h1 text-center" style="color: black"> Gestion des filières </h1>
+    <br />
+    <div class="container center mt-5 mx-auto" style="color: black">
+        <h:form>
+            <fieldset class="border p-3 rounded" style="max-width: 700px; color: black;">
+                <legend class="font-weight-bold" style="color: black">#{filiereBean.label} d'une filière</legend>
+
+                <div class="row mb-3 " style="color: black">
+                    <div class="col-md-6 mx-auto" style="color: black">
+                        <label for="idInput" class="form-label" style="color: black">ID:</label>
+                        <h:inputText id="idInput" value="#{filiereBean.filiere.id}" class="form-control" readonly="true" />
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6 mx-auto">
+                        <label for="codeInput" class="form-label" style="color: black">Code:</label>
+                        <h:inputText id="codeInput" value="#{filiereBean.filiere.code}" class="form-control" required="true" />
+                    </div>
+                </div>
+
+                <div class="row mb-3 ">
+                    <div class="col-md-6 mx-auto">
+                        <label for="libelleInput" class="form-label" style="color: black">Libelle:</label>
+                        <h:inputText id="libelleInput" value="#{filiereBean.filiere.libelle}" class="form-control" required="true" />
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6 mx-auto">
+                        <h:commandButton action="#{filiereBean.save()}" value="#{filiereBean.label}" styleClass="btn btn-primary" style="background-color: blue; border-color: blue; color: #fff;"/>
+                    </div>
+                </div>
+            </fieldset>
+        </h:form>
+    </div>
+
+    <div class="container mt-5 mx-auto">
+        <h:form>
+            <tr>
+                <td colspan="5" style="text-align: left; color: black">
+                    Nombre total des filières est  :  #{filiereBean.filieres.size()}
+                </td>
+            </tr>
+            <table class="table table-striped">
+                <thead style="background-color: lightskyblue">
+                <tr style="color: black">
+                    <th scope="col" style="color: black">ID</th>
+                    <th scope="col" style="color: black">Code</th>
+                    <th scope="col" style="color: black">Libelle</th>
+                    <th scope="col" style="color: black">Modifier</th>
+                    <th scope="col" style="color: black">Supprimer</th>
+                </tr>
+                </thead>
+                <tbody>
+                <ui:repeat var="f" value="#{filiereBean.filieres}">
+                    <tr>
+                        <td style="color: black">#{f.id}</td>
+                        <td style="color: black">#{f.code}</td>
+                        <td style="color: black">#{f.libelle}</td>
+                        <td>
+                            <h:commandLink action="#{filiereBean.modifier(f)}" style="padding: 0; border: none;">
+                                <i class="fas fa-pencil-alt" style="color: #006400;"/> <!-- Solid pencil Icon -->
+                            </h:commandLink>
+                        </td>
+                        <td>
+                            <h:commandLink action="#{filiereBean.supprimer(f)}" onclick="return confirm('Are you sure??')" style="padding: 0; border: none;">
+                                <i class="fas fa-trash" style="color: #FF0000;"/> <!-- Solid Trash Icon -->
+                            </h:commandLink>
+                        </td>
+                    </tr>
+                </ui:repeat>
+                </tbody>
+            </table>
+        </h:form>
+    </div>
+</h:body>
+</html>
