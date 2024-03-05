@@ -64,5 +64,5 @@ public class Filiere {
         this.etudiants = etudiantsById;
     }
 
-    system.out.println("This is the Filiere class");
+    System.out.println("This is the Filiere class");
 }
