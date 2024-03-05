@@ -63,4 +63,7 @@ public class Filiere {
     public void setEtudiants(Collection<Etudiant> etudiantsById) {
         this.etudiants = etudiantsById;
     }
+    public void hello() {
+        System.out.println("This is the Filiere class");
+    }    
 }
