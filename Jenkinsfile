@@ -16,7 +16,7 @@ pipeline {
             steps {
                 script {
                     // Navigate to the directory containing the Maven project (root directory)
-                    dir('Gestion_Ecole') {
+                    
                         // Run Maven commands (clean, test, package)
                         sh 'mvn clean test package'
                         
@@ -26,7 +26,7 @@ pipeline {
                         } else {
                             echo "Erreur: Le fichier JAR n'a pas été trouvé."
                         }
-                    }
+                    
                 }
             }
         }
