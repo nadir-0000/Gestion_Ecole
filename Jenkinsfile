@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Clean the directory before checking out the Git repository
+                // Clean the workspace
                 deleteDir()
                 
                 // Checkout the Git repository
@@ -15,8 +15,8 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    // Navigate to the directory containing the Maven project
-                    dir('Gestion_Ecole')
+                    // Navigate to the directory containing the Maven project (root directory)
+                    dir('Gestion_Ecole') {
                         // Run Maven commands (clean, test, package)
                         sh 'mvn clean test package'
                         
