@@ -16,7 +16,7 @@ pipeline {
             steps {
                 script {
                     // Navigate to the directory containing the Maven project
-                    dir('Gestion_Ecole/java-maven/maven') {
+                    dir('Gestion_Ecole/')
                         // Run Maven commands (clean, test, package)
                         sh 'mvn clean test package'
                         
